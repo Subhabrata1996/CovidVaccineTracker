@@ -3,9 +3,9 @@ Vaccine slots tracker
 
 ## Create Env variable for twilio
 
-export ACCOUNT_SID=<Your SID>
+export ACCOUNT_SID= Your SID
   
-export AUTH_TOKEN=<Your Auth Token>
+export AUTH_TOKEN= Your Auth Token
 
 ## Install dependencies
 
