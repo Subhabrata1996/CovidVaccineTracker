@@ -1,0 +1,4 @@
+Flask
+pickle5
+requests
+twilio
