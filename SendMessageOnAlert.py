@@ -76,7 +76,7 @@ while True:
                     if user["whatsapp"] not in sessions:
                         sessions[user["whatsapp"]] = []
                     
-                    if center["session_id"] not in sessions[user["whatsapp"]]:
+                    if center["session_id"]+"_"+center["available_capacity"] not in sessions[user["whatsapp"]]:
                         tempMessage = pretty_format(center)
                         if len(message + tempMessage) > 1600:
                             send_message(message, user["whatsapp"])
@@ -84,7 +84,7 @@ while True:
                             time.sleep(2)
                         message = message+tempMessage
                         tempSession = sessions[user["whatsapp"]]
-                        tempSession.append(center["session_id"] )
+                        tempSession.append(center["session_id"] +"_"+center["available_capacity"])
                         sessions[user["whatsapp"]] = tempSession
                         with open("data/UserMessageSession.pickle", "wb") as f:
                             pickle.dump(sessions, f)
