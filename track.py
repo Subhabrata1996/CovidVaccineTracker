@@ -29,11 +29,11 @@ def all_available_slots(centers):
     availableCenters = []
     for center in centers:
         for session in center["sessions"]:
-            if session['available_capacity'] > 0: 
+            if session['available_capacity_dose1'] > 0: 
                 tempParentCenter = dict(center)
                 del tempParentCenter["sessions"]
                 tempParentCenter["date"] = session["date"]
-                tempParentCenter["available_capacity"] = session["available_capacity"]
+                tempParentCenter["available_capacity_dose1"] = session["available_capacity_dose1"]
                 tempParentCenter["min_age_limit"] = session["min_age_limit"]
                 tempParentCenter["vaccine"] = session["vaccine"]
                 tempParentCenter["session_id"] = session["session_id"]

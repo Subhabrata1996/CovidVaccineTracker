@@ -22,7 +22,7 @@ def pretty_format(center):
     "\nCENTER : \t" + str(center["center_id"]) + " - " + center["name"] + \
     "\nADDESSS : \t" + center["address"] + ", " + center["district_name"] + ", " + center["state_name"] + ", " + str(center["pincode"]) + \
     "\nVACCINE : \t" + center["vaccine"] + \
-    "\nAVAILABLE : \t" + str(center["available_capacity"]) + \
+    "\nAVAILABLE : \t" + str(center["available_capacity_dose1"]) + \
     "\nMIN AGE LIMIT : \t" + str(center["min_age_limit"]) + "\n\n\n"        
 
 account_sid = os.environ["ACCOUNT_SID"]
@@ -68,7 +68,7 @@ while True:
             pincodeList = user["pincodes"]
         else:
             pincodeList = []    
-        seniorCitizen = "senior_citizen" in user
+        seniorCitizen = user["senior_citizen"] == "on"
         message = ""
         for center in availableCenters:
             if center["district_name"] in districtNames or center["pincode"] in pincodeList:
@@ -76,7 +76,7 @@ while True:
                     if user["whatsapp"] not in sessions:
                         sessions[user["whatsapp"]] = []
                     
-                    if center["session_id"]+"_"+str(center["available_capacity"]) not in sessions[user["whatsapp"]]:
+                    if center["session_id"]+"_"+str(center["available_capacity_dose1"]) not in sessions[user["whatsapp"]]:
                         tempMessage = pretty_format(center)
                         if len(message + tempMessage) > 1600:
                             send_message(message, user["whatsapp"])
@@ -84,7 +84,7 @@ while True:
                             time.sleep(2)
                         message = message+tempMessage
                         tempSession = sessions[user["whatsapp"]]
-                        tempSession.append(center["session_id"] +"_"+str(center["available_capacity"]))
+                        tempSession.append(center["session_id"] +"_"+str(center["available_capacity_dose1"]))
                         sessions[user["whatsapp"]] = tempSession
                         with open("data/UserMessageSession.pickle", "wb") as f:
                             pickle.dump(sessions, f)
